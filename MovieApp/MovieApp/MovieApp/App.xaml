@@ -3,9 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms"
              x:Class="MovieApp.App">
-	<Application.Resources>
+    <Application.Resources>
+        <ResourceDictionary>
+            <Style x:Key="layoutStyle" TargetType="StackLayout">
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="StartAndExpand" />
+            </Style>
+        </ResourceDictionary>
 
-		<!-- Application resource dictionary -->
+        <DataTemplate x:Key="movieItemTemplate">
+            <ViewCell>
+                <Label FontSize="Medium" 
+                       FontAttributes="Bold" 
+                       Text="{Binding .}" 
+                       Margin="15" />
+            </ViewCell>
+        </DataTemplate>
 
 	</Application.Resources>
 </prism:PrismApplication>

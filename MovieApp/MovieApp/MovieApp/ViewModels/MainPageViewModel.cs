@@ -1,10 +1,6 @@
 ﻿using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MovieApp.ViewModels
 {
@@ -14,6 +10,20 @@ namespace MovieApp.ViewModels
             : base(navigationService)
         {
             Title = "Lista de Filmes";
+
+            OpenDetailsCommand = new DelegateCommand<string>(ExecuteOpenDetailsCommand);
+
+            Items = new List<string> { "Filme 1", "Filme 2", "Filme 3", "Filme 4", "Filme 5" };
+        }
+
+        public DelegateCommand<string> OpenDetailsCommand { get; set; }
+
+        public List<string> Items { get; set; }
+
+
+        void ExecuteOpenDetailsCommand(string movie)
+        {
+            App.Current.MainPage.DisplayAlert(movie, movie, "OK");
         }
     }
 }

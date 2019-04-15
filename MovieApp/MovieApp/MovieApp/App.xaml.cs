@@ -12,7 +12,10 @@ namespace MovieApp
     {
         public App() : this(null) { }
 
-        public App(IPlatformInitializer initializer) : base(initializer) { }
+        public App(IPlatformInitializer initializer) : base(initializer)
+        {
+            LiveReload.Init();
+        }
 
         protected override async void OnInitialized()
         {

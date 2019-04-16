@@ -24,7 +24,7 @@ namespace MovieApp
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MoviesListPage");
+            await NavigationService.NavigateAsync("MoviesListPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -33,6 +33,7 @@ namespace MovieApp
             containerRegistry.RegisterForNavigation<MoviesListPage, MoviesListPageViewModel>();
 
             containerRegistry.RegisterSingleton<MovieService>();
+            containerRegistry.RegisterForNavigation<MovieDetailsPage, MovieDetailsPageViewModel>();
         }
     }
 }

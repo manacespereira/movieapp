@@ -2,14 +2,25 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="MovieApp.Views.MoviesListPage">
-    <StackLayout Style="{StaticResource layoutStyle}" Padding="5">
+    <StackLayout Style="{StaticResource layoutStyle}" 
+                 Padding="5">
         <flv:FlowListView FlowColumnTemplate="{StaticResource movieItemTemplate}"
                           FlowItemsSource="{Binding Movies}" 
-                          FlowColumnCount="2"
+                          FlowColumnCount="{Binding ColumnsPerRow}"
+                          FlowItemTappedCommand="{Binding OpenDetailsCommand}"
+                          IsRefreshing="{Binding IsLoading}"
+                          RefreshCommand="{Binding RefreshCommand}"
+                          FlowEmptyTemplate="{Binding movieLoadingTemplate}"
+                          IsPullToRefreshEnabled="True"
                           HasUnevenRows="True">
+            <flv:FlowListView.Behaviors>
+                <b:EventToCommandBehavior EventName="SizeChanged"
+                                          Command="{Binding SizeChangedCommand}" />
+            </flv:FlowListView.Behaviors>
         </flv:FlowListView>
     </StackLayout>
 </ContentPage>

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace MovieApp.Models
+namespace MovieApp.Helpers
 {
     public class Response<T> where T : class
     {
@@ -13,6 +13,6 @@ namespace MovieApp.Models
         [JsonProperty("total_pages")]
         public int TotalPages { get; set; }
 
-        public IEnumerable<T> Results { get; set; }
+        public T Results { get; set; }
     }
 }

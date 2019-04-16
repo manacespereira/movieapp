@@ -4,6 +4,8 @@ using MovieApp.ViewModels;
 using MovieApp.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using DLToolkit.Forms.Controls;
+using MovieApp.Services;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MovieApp
@@ -15,19 +17,22 @@ namespace MovieApp
         public App(IPlatformInitializer initializer) : base(initializer)
         {
             LiveReload.Init();
+            FlowListView.Init();
         }
 
         protected override async void OnInitialized()
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("NavigationPage/MoviesListPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<MoviesListPage, MoviesListPageViewModel>();
+
+            containerRegistry.RegisterSingleton<MovieService>();
         }
     }
 }

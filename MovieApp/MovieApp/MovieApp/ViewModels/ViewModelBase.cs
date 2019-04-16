@@ -20,7 +20,10 @@ namespace MovieApp.ViewModels
         #region Properties
 
         public string Title { get; set; }
+
         public bool IsBusy { get; set; }
+
+        public bool IsLoading { get; set; }
 
         #endregion
 

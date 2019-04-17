@@ -53,6 +53,9 @@ namespace MovieApp.Models
         [JsonProperty("video_count")]
         public int VoteCount { get; set; }
 
+        [JsonProperty("genre_ids")]
+        public IEnumerable<int> GenreIds { get; set; }
+
         public IEnumerable<Genre> Genres { get; set; }
 
         [JsonProperty("production_companies")]

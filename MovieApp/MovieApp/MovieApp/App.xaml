@@ -1,11 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms"
                         xmlns:controls="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+                        xmlns:helpers="clr-namespace:MovieApp.Helpers;assembly=MovieApp"
                         x:Class="MovieApp.App">
     <Application.Resources>
         <ResourceDictionary>
+            
+            <helpers:InverseBoolConverter x:Key="inverse" />
+            
             <Style x:Key="layoutStyle" TargetType="StackLayout">
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
                 <Setter Property="VerticalOptions" Value="FillAndExpand" />
@@ -19,7 +23,6 @@
                 <Setter Property="BackgroundColor" Value="#1D212B" />
                 <Setter Property="Margin" Value="5" />
                 <Setter Property="Padding" Value="0" />
-                <Setter Property="Padding" Value="0" />
                 <Setter Property="HasShadow" Value="True" />
                 <Setter Property="CornerRadius" Value="10" />
             </Style>
@@ -28,9 +31,20 @@
         <DataTemplate x:Key="movieItemTemplate">
             <Frame Style="{StaticResource frameStyle}">
                 <StackLayout>
-                    <Image Source="{Binding PosterPath}" Aspect="Fill" />
+                    <Image Aspect="AspectFit">
+                        <Image.Source>
+                            <UriImageSource Uri="{Binding PosterPath}" CacheValidity="30" CachingEnabled="true" />
+                        </Image.Source>
+                    </Image>
                     <StackLayout Padding="5,0,5,15">
                         <Label Style="{StaticResource labelMovieTileStyle}" Text="{Binding Title}" TextColor="White" />
+                        <Label Text="{Binding ReleaseDate, StringFormat='{0:dd/MM/yyyy}'}" 
+                               Margin="0,15,0,0"
+                               TextColor="White"
+                               FontSize="Micro"
+                               HorizontalOptions="Center" />
+                        <controls:FlowListView FlowColumnTemplate="{StaticResource genreItemTemplate}">
+                        </controls:FlowListView>
                     </StackLayout>
                 </StackLayout>
             </Frame>

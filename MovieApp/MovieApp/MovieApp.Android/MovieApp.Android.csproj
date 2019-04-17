@@ -62,8 +62,8 @@
     <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.1" />
     <PackageReference Include="Prism.Unity.Forms" Version="7.1.0.431" />
-    <PackageReference Include="Xamarin.LiveReload">
-      <Version>0.3.27</Version>
+    <PackageReference Include="Xamarin.HotReload">
+      <Version>1.2.4</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +81,7 @@
     <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\temp.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -94,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieApp\MovieApp.csproj">
-      <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
+      <Project>{A291B6CF-44D2-40F4-8893-06B3F171FBC7}</Project>
       <Name>MovieApp</Name>
     </ProjectReference>
   </ItemGroup>

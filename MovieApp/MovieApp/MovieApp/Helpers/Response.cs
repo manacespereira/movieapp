@@ -14,5 +14,7 @@ namespace MovieApp.Helpers
         public int TotalPages { get; set; }
 
         public T Results { get; set; }
+
+        public T Genres { get; set; }
     }
 }

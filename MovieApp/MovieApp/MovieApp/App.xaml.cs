@@ -6,6 +6,9 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using DLToolkit.Forms.Controls;
 using MovieApp.Services;
+using System.IO;
+using System;
+using MovieApp.Helpers;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MovieApp
@@ -16,7 +19,7 @@ namespace MovieApp
 
         public App(IPlatformInitializer initializer) : base(initializer)
         {
-            LiveReload.Init();
+            HotReloader.Current.Start(this);
             FlowListView.Init();
         }
 
@@ -31,9 +34,9 @@ namespace MovieApp
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MoviesListPage, MoviesListPageViewModel>();
+            containerRegistry.RegisterForNavigation<MovieDetailsPage, MovieDetailsPageViewModel>();
 
             containerRegistry.RegisterSingleton<MovieService>();
-            containerRegistry.RegisterForNavigation<MovieDetailsPage, MovieDetailsPageViewModel>();
         }
     }
 }

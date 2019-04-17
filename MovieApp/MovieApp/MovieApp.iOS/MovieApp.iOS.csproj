@@ -181,6 +181,7 @@
     <BundleResource Include="Resources\Default.png" />
     <BundleResource Include="Resources\Default@2x.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <BundleResource Include="Resources\temp.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -191,13 +192,13 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.2.0.839982" />
     <PackageReference Include="Prism.Unity.Forms" Version="7.1.0.431" />
-    <PackageReference Include="Xamarin.LiveReload">
-      <Version>0.3.27</Version>
+    <PackageReference Include="Xamarin.HotReload">
+      <Version>1.2.4</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieApp\MovieApp.csproj">
-      <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
+      <Project>{A291B6CF-44D2-40F4-8893-06B3F171FBC7}</Project>
       <Name>MovieApp</Name>
     </ProjectReference>
   </ItemGroup>

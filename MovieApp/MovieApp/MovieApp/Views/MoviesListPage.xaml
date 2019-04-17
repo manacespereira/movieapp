@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
@@ -8,19 +8,31 @@
              x:Class="MovieApp.Views.MoviesListPage">
     <StackLayout Style="{StaticResource layoutStyle}" 
                  Padding="5">
+        <Frame Margin="5,35,5,0" Opacity=".7" BorderColor="Transparent" CornerRadius="30" BackgroundColor="#1D212B">
+            <Label Text="UPCOMING MOVIES"
+                   TextColor="Coral" 
+                   FontSize="20"
+                   HorizontalTextAlignment="Center"
+                   FontAttributes="Bold" />
+        </Frame>
         <flv:FlowListView FlowColumnTemplate="{StaticResource movieItemTemplate}"
                           FlowItemsSource="{Binding Movies}" 
                           FlowColumnCount="{Binding ColumnsPerRow}"
                           FlowItemTappedCommand="{Binding OpenDetailsCommand}"
-                          IsRefreshing="{Binding IsLoading}"
-                          RefreshCommand="{Binding RefreshCommand}"
+                          IsRefreshing="{Binding IsBusy}"
                           FlowEmptyTemplate="{Binding movieLoadingTemplate}"
-                          IsPullToRefreshEnabled="True"
-                          HasUnevenRows="True">
+                          HasUnevenRows="True"
+                          BackgroundColor="Coral">
             <flv:FlowListView.Behaviors>
                 <b:EventToCommandBehavior EventName="SizeChanged"
                                           Command="{Binding SizeChangedCommand}" />
             </flv:FlowListView.Behaviors>
+            <flv:FlowListView.Footer>
+                <StackLayout Padding="15">
+                    <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Color="#1D212B" Opacity=".7" />
+                    <Button Margin="0,15,0,0" IsVisible="{Binding IsLoading, Converter={StaticResource inverse}}" Command="{Binding ScrollEndCommand}" Text="Load more..." HorizontalOptions="Center" Padding="25,15,25,15" BackgroundColor="#1D212B" Opacity=".7" TextColor="Coral" />
+                </StackLayout>
+            </flv:FlowListView.Footer>
         </flv:FlowListView>
     </StackLayout>
 </ContentPage>

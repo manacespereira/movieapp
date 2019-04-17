@@ -15,7 +15,10 @@ namespace MovieApp.ViewModels
         public ViewModelBase(INavigationService navigationService)
         {
             NavigationService = navigationService;
+            GoBackCommand = new DelegateCommand(ExecuteGoBackCommand);
         }
+
+        public DelegateCommand GoBackCommand { get; set; }
 
         #region Properties
 
@@ -26,6 +29,11 @@ namespace MovieApp.ViewModels
         public bool IsLoading { get; set; }
 
         #endregion
+
+        async void ExecuteGoBackCommand()
+        {
+            await NavigationService.GoBackAsync();
+        }
 
         #region Lifecycle Methods
 

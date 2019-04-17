@@ -12,14 +12,14 @@ namespace MovieApp.ViewModels
 	{
         public MovieDetailsPageViewModel(INavigationService navigationService) 
             : base(navigationService)
-        {
-            
-        }
+        {}
+
+        public Movie SelectedMovie { get; set; }
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
             base.OnNavigatingTo(parameters);
-            var movie = parameters.GetValue<Movie>("selectedMovie");
+            SelectedMovie = parameters.GetValue<Movie>("selectedMovie");
         }
     }
 }

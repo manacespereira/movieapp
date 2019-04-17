@@ -21,13 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Helpers\Cache.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Helpers\Cache.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
   </ItemGroup>
 </Project>

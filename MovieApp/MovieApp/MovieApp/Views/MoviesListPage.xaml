@@ -8,21 +8,26 @@
              x:Class="MovieApp.Views.MoviesListPage">
     <StackLayout Style="{StaticResource layoutStyle}" 
                  Padding="5">
-        <Frame Margin="5,35,5,0" Opacity=".7" BorderColor="Transparent" CornerRadius="30" BackgroundColor="#1D212B">
+        <Frame Opacity=".7" BorderColor="Transparent" CornerRadius="30" BackgroundColor="#1D212B">
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="5,35,5,0" />
+                    <On Platform="Android" Value="0,0,0,0" />
+                </OnPlatform>
+            </Frame.Margin>
             <Label Text="UPCOMING MOVIES"
                    TextColor="Coral" 
                    FontSize="20"
                    HorizontalTextAlignment="Center"
                    FontAttributes="Bold" />
         </Frame>
-        <flv:FlowListView FlowColumnTemplate="{StaticResource movieItemTemplate}"
-                          FlowItemsSource="{Binding Movies}" 
+        <flv:FlowListView FlowItemsSource="{Binding Movies}" 
+                          FlowColumnTemplate="{StaticResource movieItemTemplate}"
                           FlowColumnCount="{Binding ColumnsPerRow}"
                           FlowItemTappedCommand="{Binding OpenDetailsCommand}"
                           IsRefreshing="{Binding IsBusy}"
                           FlowEmptyTemplate="{Binding movieLoadingTemplate}"
-                          HasUnevenRows="True"
-                          BackgroundColor="Coral">
+                          RowHeight="330">
             <flv:FlowListView.Behaviors>
                 <b:EventToCommandBehavior EventName="SizeChanged"
                                           Command="{Binding SizeChangedCommand}" />

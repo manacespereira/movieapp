@@ -74,6 +74,7 @@ namespace MovieApp.ViewModels
                 repo.AddGenres(movieService.GetAllGenres().Genres);
 
             IsLoading = true;
+
             var response = await Task.Run(() => movieService.GetUpcoming(page: CurrentPage));
 
             var movies = response.Results;
@@ -86,6 +87,7 @@ namespace MovieApp.ViewModels
 
             if (Movies == null)
                 Movies = new ObservableCollection<Movie>();
+
             foreach (var item in movies)
                 Movies.Add(item);
 

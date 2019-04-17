@@ -8,34 +8,68 @@
              x:Class="MovieApp.Views.MoviesListPage">
     <StackLayout Style="{StaticResource layoutStyle}" 
                  Padding="5">
-        <Frame Opacity=".7" BorderColor="Transparent" CornerRadius="30" BackgroundColor="#1D212B">
-            <Frame.Margin>
+        <SearchBar x:Name="searchBar" BackgroundColor="Transparent" CancelButtonColor="Black" TextColor="Coral">
+             <SearchBar.Margin>
                 <OnPlatform x:TypeArguments="Thickness">
                     <On Platform="iOS" Value="5,35,5,0" />
                     <On Platform="Android" Value="0,0,0,0" />
                 </OnPlatform>
-            </Frame.Margin>
-            <Label Text="UPCOMING MOVIES"
-                   TextColor="Coral" 
-                   FontSize="20"
-                   HorizontalTextAlignment="Center"
-                   FontAttributes="Bold" />
-        </Frame>
+            </SearchBar.Margin>
+            <SearchBar.Behaviors>
+                <b:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchCommand}" CommandParameter="{Binding Text, Source={x:Reference searchBar}}" />
+            </SearchBar.Behaviors>
+        </SearchBar>
         <flv:FlowListView FlowItemsSource="{Binding Movies}" 
-                          FlowColumnTemplate="{StaticResource movieItemTemplate}"
                           FlowColumnCount="{Binding ColumnsPerRow}"
                           FlowItemTappedCommand="{Binding OpenDetailsCommand}"
-                          IsRefreshing="{Binding IsBusy}"
-                          FlowEmptyTemplate="{Binding movieLoadingTemplate}"
-                          RowHeight="330">
+                          RowHeight="400"
+                          HasUnevenRows="true"
+                          BackgroundColor="Transparent">
             <flv:FlowListView.Behaviors>
                 <b:EventToCommandBehavior EventName="SizeChanged"
                                           Command="{Binding SizeChangedCommand}" />
             </flv:FlowListView.Behaviors>
+            <flv:FlowListView.FlowColumnTemplate>
+                <DataTemplate>
+                    <Frame Style="{StaticResource frameStyle}" VerticalOptions="FillAndExpand">
+                        <StackLayout VerticalOptions="Center">
+                            <Label Style="{StaticResource labelMovieTileStyle}" Margin="0,20" Text="{Binding Title}" LineBreakMode="TailTruncation" TextColor="White" />
+
+                            <Image Aspect="AspectFit">
+                                <Image.Source>
+                                    <UriImageSource Uri="{Binding PosterPath}" CacheValidity="30" CachingEnabled="true" />
+                                </Image.Source>
+                            </Image>
+
+                            <Label Text="{Binding ReleaseDate, StringFormat='Release date: {0:dd/MM/yyyy}'}" 
+                                           Margin="0,5,0,0"
+                                           TextColor="White"
+                                           FontSize="Micro"
+                                           HorizontalOptions="Center" />
+
+                            <flv:FlowListView FlowItemsSource="{Binding Genres}" 
+                                              BackgroundColor="Transparent"
+                                              FlowColumnCount="2" 
+                                              IsEnabled="false"
+                                              RowHeight="30">
+                                <flv:FlowListView.FlowColumnTemplate>
+                                    <DataTemplate>
+                                        <Frame Padding="2" Margin="5" BorderColor="Transparent" HasShadow="False" BackgroundColor="Fuchsia" CornerRadius="10">
+                                            <Frame.Content>
+                                                <Label HorizontalTextAlignment="Center" Text="{Binding Name}" TextColor="White" FontSize="Micro" FontAttributes="Bold"/>
+                                            </Frame.Content>
+                                        </Frame>
+                                    </DataTemplate>
+                                </flv:FlowListView.FlowColumnTemplate>
+                            </flv:FlowListView>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </flv:FlowListView.FlowColumnTemplate>
             <flv:FlowListView.Footer>
                 <StackLayout Padding="15">
                     <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Color="#1D212B" Opacity=".7" />
-                    <Button Margin="0,15,0,0" IsVisible="{Binding IsLoading, Converter={StaticResource inverse}}" Command="{Binding ScrollEndCommand}" Text="Load more..." HorizontalOptions="Center" Padding="25,15,25,15" BackgroundColor="#1D212B" Opacity=".7" TextColor="Coral" />
+                    <Button Margin="0,15,0,0" IsVisible="{Binding IsLoading, Converter={StaticResource inverse}}" Command="{Binding LoadMoreCommand}" Text="Load more..." HorizontalOptions="Center" Padding="25,15,25,15" BackgroundColor="#1D212B" Opacity=".7" TextColor="Coral" />
                 </StackLayout>
             </flv:FlowListView.Footer>
         </flv:FlowListView>

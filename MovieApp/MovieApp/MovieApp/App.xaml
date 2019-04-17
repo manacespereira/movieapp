@@ -11,8 +11,8 @@
             <helpers:InverseBoolConverter x:Key="inverse" />
 
             <Style x:Key="layoutStyle" TargetType="StackLayout">
-                <Setter Property="HorizontalOptions" Value="Fill" />
-                <Setter Property="VerticalOptions" Value="Fill" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
                 <Setter Property="BackgroundColor" Value="Coral" />
             </Style>
             <Style x:Key="labelMovieTileStyle" TargetType="Label">
@@ -28,8 +28,8 @@
             </Style>
         </ResourceDictionary>
 
-        <DataTemplate x:Key="movieItemTemplate">
-            <Frame Style="{StaticResource frameStyle}">
+       <!-- <DataTemplate x:Key="movieItemTemplate">
+            <Frame Style="{StaticResource frameStyle}" VerticalOptions="FillAndExpand">
                 <StackLayout VerticalOptions="FillAndExpand">
                     <Image Aspect="AspectFit">
                         <Image.Source>
@@ -46,19 +46,21 @@
                                    HorizontalOptions="Center" />
 
                     <controls:FlowListView FlowItemsSource="{Binding Genres}" 
-                                              FlowColumnTemplate="{StaticResource genreItemTemplate}"
-                                              FlowColumnCount="2" 
-                                              HasUnevenRows="True" />
+                                           FlowColumnTemplate="{StaticResource genreItemTemplate}"
+                                           BackgroundColor="Transparent"
+                                           FlowColumnCount="2" 
+                                           IsEnabled="false"
+                                           RowHeight="50" />
                 </StackLayout>
             </Frame>
-        </DataTemplate>
+        </DataTemplate>-->
 
-        <DataTemplate x:Key="genreItemTemplate">
-            <Frame Padding="2" VerticalOptions="Start" Margin="5" BorderColor="Transparent" HasShadow="False" BackgroundColor="Accent" CornerRadius="20">
+        <!--<DataTemplate x:Key="genreItemTemplate">
+            <Frame Padding="2" VerticalOptions="Start" Margin="5" BorderColor="Transparent" HasShadow="False" BackgroundColor="Fuchsia" CornerRadius="10">
                 <Frame.Content>
                     <Label HorizontalTextAlignment="Center" Text="{Binding Name}" TextColor="White" FontSize="Micro" FontAttributes="Bold"/>
                 </Frame.Content>
             </Frame>
-        </DataTemplate>
+        </DataTemplate>-->
     </Application.Resources>
 </prism:PrismApplication>

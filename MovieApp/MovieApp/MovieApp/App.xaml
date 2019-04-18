@@ -2,13 +2,12 @@
 <prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                         xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms"
-                        xmlns:controls="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
-                        xmlns:helpers="clr-namespace:MovieApp.Helpers;assembly=MovieApp"
+                        xmlns:converters="clr-namespace:MovieApp.Converters"
                         x:Class="MovieApp.App">
     <Application.Resources>
         <ResourceDictionary>
 
-            <helpers:InverseBoolConverter x:Key="inverse" />
+            <converters:InverseBoolConverter x:Key="inverse" />
 
             <Style x:Key="layoutStyle" TargetType="StackLayout">
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />

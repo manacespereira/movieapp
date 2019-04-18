@@ -4,15 +4,20 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             xmlns:i18n="clr-namespace:MovieApp.Extensions"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="MovieApp.Views.MoviesListPage">
     <StackLayout Style="{StaticResource layoutStyle}" 
                  Padding="5">
-        <SearchBar x:Name="searchBar" BackgroundColor="Transparent" CancelButtonColor="Black" TextColor="Coral">
+        <SearchBar x:Name="searchBar" 
+                   BackgroundColor="Transparent" 
+                   CancelButtonColor="Black" 
+                   TextColor="Fuchsia" 
+                   Placeholder="{i18n:Translate TypeHere}">
              <SearchBar.Margin>
                 <OnPlatform x:TypeArguments="Thickness">
                     <On Platform="iOS" Value="5,35,5,0" />
-                    <On Platform="Android" Value="0,0,0,0" />
+                    <On Platform="Android" Value="0" />
                 </OnPlatform>
             </SearchBar.Margin>
             <SearchBar.Behaviors>
@@ -37,7 +42,7 @@
 
                             <Image Aspect="AspectFit">
                                 <Image.Source>
-                                    <UriImageSource Uri="{Binding PosterPath}" CacheValidity="30" CachingEnabled="true" />
+                                    <UriImageSource Uri="{Binding PosterSourceImage}" CacheValidity="30" CachingEnabled="true" />
                                 </Image.Source>
                             </Image>
 

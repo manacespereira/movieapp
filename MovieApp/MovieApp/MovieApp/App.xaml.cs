@@ -6,9 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using DLToolkit.Forms.Controls;
 using MovieApp.Services;
-using System.IO;
-using System;
-using MovieApp.Helpers;
+using MovieApp.Resources;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MovieApp
@@ -19,24 +17,38 @@ namespace MovieApp
 
         public App(IPlatformInitializer initializer) : base(initializer)
         {
+            #if DEBUG
             HotReloader.Current.Start(this);
+            #endif
             FlowListView.Init();
+            SetCultureInfo();
         }
 
         protected override async void OnInitialized()
         {
             InitializeComponent();
-
             await NavigationService.NavigateAsync("MoviesListPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            // Register of navigations pages
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MoviesListPage, MoviesListPageViewModel>();
             containerRegistry.RegisterForNavigation<MovieDetailsPage, MovieDetailsPageViewModel>();
 
+            // Register of services
             containerRegistry.RegisterSingleton<MovieService>();
+        }
+
+       void SetCultureInfo ()
+        {
+            if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+            {
+                var ci = DependencyService.Get<ICultureService>().GetCurrentCultureInfo();
+                AppResources.Culture = ci;
+                DependencyService.Get<ICultureService>().SetLocale(ci);
+            }
         }
     }
 }

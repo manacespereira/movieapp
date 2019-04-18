@@ -52,13 +52,12 @@ namespace MovieApp.ViewModels
             ColumnsPerRow = DeviceDisplay.MainDisplayInfo.Orientation == DisplayOrientation.Portrait ? 2 : 3;
         }
 
-        async void ExecuteSearchCommand(string filter)
+        void ExecuteSearchCommand(string filter)
         {
             Movies = new ObservableCollection<Movie>(moviesToFilter.Where(x =>
+                string.IsNullOrEmpty(filter) ||
                 x.Title.ToLower().Contains(filter.ToLower()) ||
-                x.ReleaseDate.ToString().Contains(filter) ||
-                x.IMDbId.ToString().Contains(filter) ||
-                string.IsNullOrEmpty(filter)));
+                x.ReleaseDate.ToString().Contains(filter)));
         }
 
         void ExecuteLoadMoreCommand()

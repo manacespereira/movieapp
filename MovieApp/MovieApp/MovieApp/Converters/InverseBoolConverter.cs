@@ -2,7 +2,7 @@
 using System.Globalization;
 using Xamarin.Forms;
 
-namespace MovieApp.Helpers
+namespace MovieApp.Converters
 {
     public class InverseBoolConverter : IValueConverter
     {

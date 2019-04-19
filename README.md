@@ -6,7 +6,7 @@
 3. Restore the NuGet Packages
 4. Run on Android/iOS device or simulator/emulator
 
-## Third-party libries
+## Third-party libraries
 0. Prims as MVVM Framework - https://prismlibrary.github.io/index.html
 Used to accelerate the development, abstracting a lot of code that I did not need implement (like navigation service, view model base, etc)
 

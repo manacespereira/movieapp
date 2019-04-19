@@ -25,9 +25,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Helpers\Cache.cs" />
+    <Compile Remove="Converters\InverseBoolConverter" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
+    <Folder Include="Behaviors\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources\AppResources.Designer.cs">
@@ -35,10 +38,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\AppResources.pt-BR.Designer.cs">
+      <DependentUpon>AppResources.pt-BR.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Resources\AppResources.pt-BR.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.pt-BR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

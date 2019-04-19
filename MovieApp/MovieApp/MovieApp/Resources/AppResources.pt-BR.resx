@@ -120,4 +120,7 @@
   <data name="TypeHere" xml:space="preserve">
     <value>Digite aqui...</value>
   </data>
+    <data name="ReleaseDate" xml:space="preserve">
+        <value>Estreia</value>
+    </data>
 </root>

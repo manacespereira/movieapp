@@ -54,8 +54,12 @@ namespace MovieApp.ViewModels
 
         void ExecuteSearchCommand(string filter)
         {
+            if(string.IsNullOrEmpty(filter))
+            {
+                Movies = new ObservableCollection<Movie>(moviesToFilter);
+                return;
+            }
             Movies = new ObservableCollection<Movie>(moviesToFilter.Where(x =>
-                string.IsNullOrEmpty(filter) ||
                 x.Title.ToLower().Contains(filter.ToLower()) ||
                 x.ReleaseDate.ToString().Contains(filter)));
         }

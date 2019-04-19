@@ -2,52 +2,54 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
+             xmlns:i18n="clr-namespace:MovieApp.Extensions"
              xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView" 
-             prism:ViewModelLocator.AutowireViewModel="True" 
+             prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="MovieApp.Views.MovieDetailsPage">
-    <StackLayout BackgroundColor="Coral" 
-                 HorizontalOptions="FillAndExpand"
-                 VerticalOptions="FillAndExpand">
-        <Image Opacity=".7" Margin="0,-15,0,0" 
-               Source="{Binding SelectedMovie.BackdropSourceImage}" 
-               Aspect="Fill" HeightRequest="240" />
+    <StackLayout BackgroundColor="#1D212B">
+        <Image Opacity=".5" Margin="0,-15,0,0" Aspect="Fill" HeightRequest="240">
+            <Image.Source>
+                <UriImageSource Uri="{Binding SelectedMovie.BackdropSourceImage}" CacheValidity="30" CachingEnabled="true" />
+            </Image.Source>
+        </Image>
         <StackLayout HorizontalOptions="Fill" Margin="0,-240,0,0">
-            <Button FontSize="20" Command="{Binding GoBackCommand}" 
-                    Text="X" TextColor="Coral" HorizontalOptions="End" 
-                    BorderRadius="50" BackgroundColor="Black" 
-                    WidthRequest="50" Opacity=".6">
+            <Button FontSize="20" Command="{Binding GoBackCommand}" Text="X" TextColor="White" HorizontalOptions="End" BorderRadius="50" BackgroundColor="#4682B4" HeightRequest="50" WidthRequest="50" Opacity=".8">
                 <Button.Margin>
                     <OnPlatform x:TypeArguments="Thickness">
-                        <On Platform="iOS" Value="5,40" />
-                        <On Platform="Android" Value="5,20" />
+                        <On Platform="iOS" Value="0,40,15,0" />
+                        <On Platform="Android" Value="0,20,15,0" />
                     </OnPlatform>
                 </Button.Margin>
             </Button>
-            <ScrollView>
-                <Grid Padding="10">
+            <ScrollView VerticalOptions="Fill">
+                <Grid Padding="15">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Image Source="{Binding SelectedMovie.PosterSourceImage}" Aspect="AspectFit" />
+                    <Image Aspect="AspectFit">
+                        <Image.Source>
+                            <UriImageSource Uri="{Binding SelectedMovie.PosterSourceImage}" CacheValidity="30" CachingEnabled="true" />
+                        </Image.Source>
+                    </Image>
                     <StackLayout Grid.Column="1">
-                        <Label Text="{Binding SelectedMovie.Title}" TextColor="White" FontSize="Large" FontAttributes="Bold" Margin="0,70,0,0" />
-                        <BoxView HorizontalOptions="FillAndExpand" HeightRequest="5" Color="Fuchsia" Margin="0,-5,0,0" />
-                        <Label Text="{Binding SelectedMovie.ReleaseDate, StringFormat='Release: {0:dd/MM/yyyy}'}" TextColor="White" FontAttributes="Bold" />
-                        <flv:FlowListView FlowItemsSource="{Binding SelectedMovie.Genres}" HeightRequest="100" FlowColumnCount="2" IsEnabled="false" BackgroundColor="Transparent" HasUnevenRows="True">
-                            <flv:FlowListView.FlowColumnTemplate>
-                                <DataTemplate>
-                                    <Frame Padding="2" Margin="5" BorderColor="Transparent" HasShadow="False" BackgroundColor="Fuchsia" CornerRadius="10">
-                                        <Frame.Content>
-                                            <Label HorizontalTextAlignment="Center" Text="{Binding Name}" TextColor="White" FontSize="Micro" FontAttributes="Bold" />
-                                        </Frame.Content>
-                                    </Frame>
-                                </DataTemplate>
-                            </flv:FlowListView.FlowColumnTemplate>
+                        <Label Text="{Binding SelectedMovie.Title}" TextColor="White" FontSize="Large" FontAttributes="Bold" />
+                        <BoxView HeightRequest="5" Color="#4682B4" Margin="0,-5,0,0" />
+                        <FlexLayout JustifyContent="Start">
+                            <Label Text="{i18n:Translate ReleaseDate}" FontSize="Small" TextColor="White" FontAttributes="Bold" />
+                            <Label Text="{Binding SelectedMovie.ReleaseDate, StringFormat=':{0:dd/MM/yyyy}'}" FontSize="Small" TextColor="White" />
+                        </FlexLayout>
+                        <flv:FlowListView FlowItemsSource="{Binding SelectedMovie.Genres}" 
+                                          FlowColumnTemplate="{StaticResource genreItemTemplate}"
+                                          FlowColumnCount="2" 
+                                          IsEnabled="false" 
+                                          HeightRequest="100"
+                                          HasUnevenRows="true"
+                                          BackgroundColor="Transparent">
                         </flv:FlowListView>
                     </StackLayout>
-                    <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Padding="25,0">
-                        <Label Text="{Binding SelectedMovie.Overview}" TextColor="White" FontSize="Small" HorizontalTextAlignment="Center" />
+                    <StackLayout Padding="15"  Grid.Row="1" Grid.ColumnSpan="2">
+                        <Label HorizontalTextAlignment="Center" Text="{Binding SelectedMovie.Overview}" TextColor="White" FontSize="Small" />
                     </StackLayout>
                 </Grid>
             </ScrollView>

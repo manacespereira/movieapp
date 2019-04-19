@@ -2,7 +2,9 @@
 using System.Threading;
 using MovieApp.Helpers;
 using MovieApp.Services;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(MovieApp.Droid.Services.CultureService))]
 namespace MovieApp.Droid.Services
 {
     public class CultureService : ICultureService

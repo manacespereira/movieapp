@@ -22,7 +22,7 @@ Used to get some device configurations like orientation, etc..
 4. RestSharp - http://restsharp.org/ (I can do this using native .NET HttpClient also but I prefer RestSharp)
 Used to make http requests to get the movies
 
-5.SQLite as Local Database - https://www.sqlite.org/index.html
+5. SQLite as Local Database - https://www.sqlite.org/index.html
 Used to save all the genres, because the upcoming endpoint not send to us the object array... only an array of interger (Ids)
 
 6. Xamarin.HotReload - https://github.com/AndreiMisiukevich/HotReload

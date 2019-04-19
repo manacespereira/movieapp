@@ -17,10 +17,14 @@ namespace MovieApp
 
         public App(IPlatformInitializer initializer) : base(initializer)
         {
+            // Only works in Debug MODE.
             #if DEBUG
             HotReloader.Current.Start(this);
             #endif
+
             FlowListView.Init();
+
+            // Set the culture info of device
             SetCultureInfo();
         }
 

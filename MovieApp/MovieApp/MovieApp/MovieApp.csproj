@@ -26,6 +26,10 @@
   <ItemGroup>
     <Compile Remove="Helpers\Cache.cs" />
     <Compile Remove="Converters\InverseBoolConverter" />
+    <Compile Remove="Models\EStatus.cs" />
+    <Compile Remove="Models\Language.cs" />
+    <Compile Remove="Models\ProductionCompany.cs" />
+    <Compile Remove="Models\ProductionCountry.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />

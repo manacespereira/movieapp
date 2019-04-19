@@ -15,6 +15,7 @@ namespace MovieApp.Helpers
 
         public T Results { get; set; }
 
+        // Used to ger Genre endpoint response
         public T Genres { get; set; }
     }
 }

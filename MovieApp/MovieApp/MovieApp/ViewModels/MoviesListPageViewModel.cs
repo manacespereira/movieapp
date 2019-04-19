@@ -31,6 +31,8 @@ namespace MovieApp.ViewModels
         private readonly MovieService movieService;
 
         public ObservableCollection<Movie> Movies { get; set; }
+
+        //Only used to filter
         private List<Movie> moviesToFilter { get; set; } = new List<Movie>();
 
         public int ColumnsPerRow { get; set; }
@@ -47,6 +49,9 @@ namespace MovieApp.ViewModels
             await NavigationService.NavigateAsync("MovieDetailsPage", new NavigationParameters { { "selectedMovie", movie } });
         }
 
+        /// <summary>
+        /// Execute when the user change device orientation
+        /// </summary>
         void ExecuteSizeChangedCommand()
         {
             ColumnsPerRow = DeviceDisplay.MainDisplayInfo.Orientation == DisplayOrientation.Portrait ? 2 : 3;
@@ -76,20 +81,19 @@ namespace MovieApp.ViewModels
 
             var repo = new Repository();
 
+            // Save locally all genres if it was not save before
             if (!repo.GenresWasLoaded())
                 repo.AddGenres(movieService.GetAllGenres().Genres);
 
             var response = await Task.Run(() => movieService.GetUpcoming(page: CurrentPage));
 
-            var movies = response.Results;
-
             if (Movies == null)
                 Movies = new ObservableCollection<Movie>();
 
-            foreach (var item in movies)
+            foreach (var item in response.Results)
                 Movies.Add(item);
 
-            moviesToFilter.AddRange(movies);
+            moviesToFilter.AddRange(response.Results);
 
             IsLoading = false;
         }

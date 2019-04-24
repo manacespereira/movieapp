@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:bLocal="clr-namespace:MovieApp.Behaviors"
+             xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             xmlns:i18n="clr-namespace:MovieApp.Extensions"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="MovieApp.Views.MoviesListPage">
+    <StackLayout Style="{StaticResource layoutStyle}" 
+                 Padding="5">
+        <SearchBar x:Name="searchBar" 
+                   BackgroundColor="Transparent" 
+                   CancelButtonColor="Black" 
+                   SearchCommand="{Binding SearchCommand}" 
+                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                   Placeholder="{i18n:Translate TypeHere}">
+             <SearchBar.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="5,35,5,0" />
+                    <On Platform="Android" Value="0" />
+                </OnPlatform>
+            </SearchBar.Margin>
+            <SearchBar.TextColor>
+                <OnPlatform x:TypeArguments="Color">
+                    <On Platform="iOS" Value="Black" />
+                    <On Platform="Android" Value="White" />
+                </OnPlatform>
+            </SearchBar.TextColor>
+            <SearchBar.Behaviors>
+                <bLocal:TextChangedBehavior />
+            </SearchBar.Behaviors>
+        </SearchBar>
+        <flv:FlowListView FlowItemsSource="{Binding Movies}" 
+                          FlowColumnCount="{Binding ColumnsPerRow}"
+                          FlowItemTappedCommand="{Binding OpenDetailsCommand}"
+                          FlowColumnTemplate="{StaticResource movieItemTemplate}"
+                          HasUnevenRows="true"
+                          BackgroundColor="Transparent">
+            <flv:FlowListView.Behaviors>
+                <b:EventToCommandBehavior EventName="SizeChanged"
+                                          Command="{Binding SizeChangedCommand}" />
+            </flv:FlowListView.Behaviors>
+            <flv:FlowListView.Footer>
+                <StackLayout Padding="15">
+                    <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Color="#1D212B" Opacity=".7" />
+                    <Button Margin="0,15,0,0" IsVisible="{Binding IsLoading, Converter={StaticResource inverse}}" Command="{Binding LoadMoreCommand}" Text="Load more..." HorizontalOptions="Center" Padding="25,15,25,15" BackgroundColor="#1D212B" Opacity=".7" TextColor="Coral" />
+                </StackLayout>
+            </flv:FlowListView.Footer>
+        </flv:FlowListView>
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        xmlns:controls="clr-namespace:MovieApp.Controls;assembly=MovieApp"
+                        xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms"
+                        xmlns:converters="clr-namespace:MovieApp.Converters"
+                        xmlns:i18n="clr-namespace:MovieApp.Extensions"
+                        xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+                        x:Class="MovieApp.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <converters:InverseBoolConverter x:Key="inverse" />
+            <Style x:Key="layoutStyle" TargetType="StackLayout">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="BackgroundColor" Value="Coral" />
+            </Style>
+            <Style x:Key="labelMovieTileStyle" TargetType="Label">
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="frameStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="#1D212B" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="HasShadow" Value="True" />
+                <Setter Property="CornerRadius" Value="10" />
+            </Style>
+        </ResourceDictionary>
+
+       <DataTemplate x:Key="movieItemTemplate">
+            <Frame Style="{StaticResource frameStyle}" VerticalOptions="FillAndExpand">
+                <StackLayout>
+                    <Label Style="{StaticResource labelMovieTileStyle}" Margin="0,20" Text="{Binding Title}" TextColor="White" />
+
+                    <AbsoluteLayout HorizontalOptions="Center">
+                        <ActivityIndicator HeightRequest="150" IsRunning="true" Color="Coral" />
+                        <Image Aspect="AspectFit">
+                            <Image.Source>
+                                <UriImageSource Uri="{Binding PosterSourceImage}" CacheValidity="30" CachingEnabled="true" />
+                            </Image.Source>
+                        </Image>
+                    </AbsoluteLayout>
+
+                    <FlexLayout JustifyContent="Center">
+                        <Label Text="{i18n:Translate ReleaseDate}" TextColor="White" FontSize="Micro" FontAttributes="Bold"/>
+                        <Label Text="{Binding ReleaseDate, StringFormat=':{0:dd/MM/yyyy}'}"
+                                   TextColor="White"
+                                   FontSize="Micro" />
+                    </FlexLayout>
+
+                   <flv:FlowListView FlowItemsSource="{Binding Genres}" 
+                                       FlowColumnTemplate="{StaticResource genreItemTemplate}"
+                                       BackgroundColor="Transparent"
+                                       FlowColumnCount="2" 
+                                       IsEnabled="false"
+                                       RowHeight="30">
+                    </flv:FlowListView>
+                </StackLayout>
+            </Frame>
+        </DataTemplate>
+
+        <DataTemplate x:Key="genreItemTemplate">
+            <controls:GenreTile GenreTileText="{Binding Name}" />
+        </DataTemplate>
+    </Application.Resources>
+</prism:PrismApplication>
